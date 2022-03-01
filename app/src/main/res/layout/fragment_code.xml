@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.code.CodeFragment">
+
+    <EditText
+        android:id="@+id/text_code"
+        android:layout_width="match_parent"
+        android:layout_height="308dp"
+        android:layout_margin="20dp"
+        android:layout_weight="@integer/config_navAnimTime"
+        android:background="@drawable/box_layout"
+        android:gravity="top"
+        android:hint="Code Here!"
+        android:inputType="textMultiLine"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="33dp" />
+
+    <Button
+        android:id="@+id/uploadButton"
+        android:layout_width="139dp"
+        android:layout_height="48dp"
+        android:layout_x="190dp"
+        android:layout_y="333dp"
+        android:text="Upload Code"
+        tools:layout_editor_absoluteX="211dp"
+        tools:layout_editor_absoluteY="376dp" />
+
+    <Button
+        android:id="@+id/readButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="43dp"
+        android:layout_y="334dp"
+        android:text="Read Code"
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="376dp" />
+
+
+</AbsoluteLayout>

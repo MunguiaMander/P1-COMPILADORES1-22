@@ -1,0 +1,93 @@
+//User code
+package com.mander.myapplication.analyzers.parser;
+
+import java_cup.runtime.*;
+import com.mander.myapplication.analyzers.lexer.Lexer;
+import java.util.ArrayList;
+
+parser code{:
+
+	
+
+:}
+
+//Terminal section
+
+terminal CADENA, NUMERO, COMILLAS;
+terminal SUMA, RESTA, MULTIPLI, DIVISION;
+terminal PARENTI, PARENTD, CORCHI, CORCHD, LLAVEI, LLAVED;
+terminal DEF, BARRAS, PIE;
+terminal TITULO, XAXIS, YAXIS, ETIQUETAS, VALORES, UNIR, TIPO, TOTAL, EXTRA;
+terminal EJECUTAR;
+terminal COMENTARIO, PUNTOCOMA, COMA, DOSPUNTOS;
+
+//Non-terminal section
+
+non terminal exec_code, graph_code, titulo, cadena, xaxis, yaxis, unir, indicacion, etiquetas, valores, total, extra, operador, tipo, operacion;
+non terminal a, b, s;
+
+//Presedence of math symbols
+precedence left SUMA, RESTA;
+precedence left MULTIPLI, DIVISION;
+
+start with s;
+
+s 	::= a b
+	;
+	
+a	::= graph_code {}
+	| graph_code a{}
+	;
+	
+b 	::= exec_code{}
+	| exec_code b{}
+	;
+
+graph_code	::= DEF BARRAS LLAVEI titulo xaxis yaxis unir LLAVED {}
+	|   DEF PIE LLAVEI titulo tipo etiquetas valores total unir extra{}
+	;
+
+titulo 	::= TITULO cadena PUNTOCOMA {}
+	;
+
+cadena 	::= COMILLAS CADENA COMILLAS{}
+	;
+
+xaxis	::= XAXIS CORCHI cadena COMA cadena CORCHD PUNTOCOMA{}
+	;
+
+yaxis	::= YAXIS CORCHI operacion COMA operacion CORCHD PUNTOCOMA{}
+	;
+
+unir	::= UNIR CORCHI indicacion COMA indicacion CORCHD PUNTOCOMA{}
+	;
+	
+operacion ::= NUMERO operador NUMERO{}
+	  | NUMERO operador NUMERO operacion{}
+	  | NUMERO{}
+	  ;
+	  
+operador ::= DIVISION{}
+	 | MULTIPLI{}
+	 | SUMA{}
+	 | RESTA{}
+	 ; 
+	
+indicacion ::= LLAVEI NUMERO COMA NUMERO LLAVED{}
+	   ;
+
+tipo	::= TIPO CADENA PUNTOCOMA{}
+	;
+
+etiquetas ::= ETIQUETAS CORCHD cadena COMA cadena CORCHD PUNTOCOMA{}
+	  ;
+	  
+valores ::= VALORES DOSPUNTOS CORCHD NUMERO COMA NUMERO CORCHI PUNTOCOMA{}
+	;
+
+extra	::= cadena PUNTOCOMA{}
+	;
+	
+exec_code ::= EJECUTAR PARENTI cadena PARENTD PUNTOCOMA{}
+	  ;
+
